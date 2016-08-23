@@ -3,7 +3,6 @@ use house::House;
 use super::locked::*;
 use solver::techniques::naked::solve_cell_naked_single;
 
-
 /*
     For each remaining poss val, build a liskt of spaces that the poss_val occurs in.
     Then, test every combination of poss_val "space list's".  If the # of "space lists" (or poss_vals) used to make up the combination
@@ -75,7 +74,6 @@ fn hidden_recurse( pos: usize, game: &mut Game, house: &House, rem_poss_vals: &V
 
     if prefix.1.len() == prefix.0.len() && prefix.0.len() != rem_poss_vals.len() {
         // remove all other candidates from those cells
-        println!("{:?}",prefix);
         for s in 0..prefix.1.len() {
             for v in 0..game.size {
                 // is v in the prefix?
@@ -87,7 +85,10 @@ fn hidden_recurse( pos: usize, game: &mut Game, house: &House, rem_poss_vals: &V
                     }
                 }
                 if found == false {
-                    game.board[prefix.1[s].0][prefix.1[s].1].val_poss_set[v] = false;
+                    if game.board[prefix.1[s].0][prefix.1[s].1].val_poss_set[v] == true {
+                        game.board[prefix.1[s].0][prefix.1[s].1].val_poss_set[v] = false;
+                        game.board[prefix.1[s].0][prefix.1[s].1].rem_poss -= 1;
+                    }
                 }
             }
         }

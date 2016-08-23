@@ -69,12 +69,9 @@ impl Game {
         let init_vals_bytes = init_vals.as_bytes();
         for y in 0..self.size {
             for x in 0..self.size {
-                let new_val =
-                    (init_vals_bytes[y * self.size + x] as char).to_digit(10).unwrap() as usize;
-                if new_val == 0 {
-                    continue;
-                }
-                set_value(self, y, x, new_val);
+                let new_val = (init_vals_bytes[y*self.size+x] as char).to_digit(10).unwrap() as usize;
+                if new_val == 0 { continue; }
+                set_value( self, y, x, new_val );
             }
         }
     }
@@ -93,7 +90,7 @@ impl Game {
     pub fn get_col(&self, col: usize) -> House {
         let mut col_spaces: Vec<(usize, usize)> = Vec::new();
         for i in 0..self.size {
-            col_spaces.push((col, i));
+            col_spaces.push((i, col));
         }
         return House {
             house_type: HouseType::COL,
