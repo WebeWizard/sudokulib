@@ -1,0 +1,6 @@
+[package]
+name = "sudokulib"
+version = "0.1.0"
+authors = ["Justin Leis <webewizard@gmail.com>"]
+
+[dependencies]
