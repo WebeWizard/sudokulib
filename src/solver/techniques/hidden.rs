@@ -72,6 +72,7 @@ fn hidden_recurse( pos: usize, game: &mut Game, house: &House, rem_poss_vals: &V
         if found == false { prefix.1.push(val_space_list[pos][s]); }
     }
 
+    // is it a hidden set?
     if prefix.1.len() == prefix.0.len() && prefix.0.len() != rem_poss_vals.len() {
         // remove all other candidates from those cells
         for s in 0..prefix.1.len() {
@@ -92,10 +93,14 @@ fn hidden_recurse( pos: usize, game: &mut Game, house: &House, rem_poss_vals: &V
                 }
             }
         }
-        solve_locked( game, &prefix, &house.house_type );
     }
-    if prefix.0.len() == 1 {
+    if prefix.0.len() == 1 && prefix.1.len() == 1 {
         solve_cell_naked_single( game, prefix.1[0].0, prefix.1[0].1 );
+    }
+    if prefix.0.len() <= game.n && prefix.1.len() <= game.n {
+
+
+        solve_locked( game, &prefix, &house.house_type );
     }
 
     for i in pos+1..rem_poss_vals.len() {

@@ -36,9 +36,9 @@ pub fn solve_locked( game: &mut Game, set: &(Vec<usize>,Vec<(usize,usize)>), hou
             for s in 1..set.1.len() {
                 if set.1[s].0 != set.1[0].0 {
                     in_row = false;
+                    break;
                 }
             }
-
             if in_row == true {
                 locked = true;
                 house = game.get_row( set.1[0].0 );
