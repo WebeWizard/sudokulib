@@ -8,6 +8,7 @@ pub fn solve( game: &mut Game ) {
     while game.solved_count < game.total {
         solve_game_hidden(game);
         println!("{}",game);
-        solve_game_chains(game);
+        // TODO: finish chains technique
+        //solve_game_chains(game);
     }
 }
